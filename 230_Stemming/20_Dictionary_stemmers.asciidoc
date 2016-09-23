@@ -1,55 +1,32 @@
-[[dictionary-stemmers]]
-=== Dictionary Stemmers
+[[字典词干提取器]]
+=== 字典词干提取器
 
-_Dictionary stemmers_ work quite differently from
-<<algorithmic-stemmers,algorithmic stemmers>>.((("stemming words", "dictionary stemmers")))((("dictionary stemmers"))) Instead
-of applying a standard set of rules to each word, they simply look up the
-word in the dictionary.  Theoretically, they could produce much better
-results than an algorithmic stemmer. A dictionary stemmer should be able to do the following:
+字典词干提取器的工作方式算法词干提取器完全不同。他们只在字典中查找这个词，而不是对每一个词应用一组标准的规则。理论上讲，他们能够获取一个比算法词干提取器更好的结果。一个字典词干提取器应该能够做到以下几点：
 
-* Return the correct root word for irregular forms such as `feet` and `mice`
-* Recognize the distinction between words that are similar but have
-  different word senses&#x2014;for example, `organ` and `organization`
+* 返回不规则形式的正确词根比如 `feet` and `mice`
+* 识别一些相似但有不同词义的词汇之间的差别&#x2014；例如 `organ` and `organization`
 
-In practice, a good algorithmic stemmer usually outperforms a dictionary
-stemmer. There are a couple of reasons this should be so:
+在实践中，一个好的算法词干提取器通常会优于字典词干提取器。这是因为下面的原因：
 
-Dictionary quality::
-+
---
-A dictionary stemmer is only as good as its dictionary. ((("dictionary stemmers", "dictionary quality and"))) The Oxford English
-Dictionary website estimates that the English language contains approximately
-750,000 words (when inflections are included). Most English dictionaries
-available for computers contain about 10% of those.
+字典质量：
 
-The meaning of words changes with time.  While stemming `mobility` to `mobil`
-may have made sense previously, it now conflates the idea of mobility with a
-mobile phone. Dictionaries need to be kept current, which is a time-consuming
-task.  Often, by the time a dictionary has been made available, some of its
-entries are already out-of-date.
+字典词干提取器只是一个好的字典。 
+牛津英语词典网站包含约750,000个词汇（包括词形的变化）。而大多数英语词典在电脑中只使用了约10%。
 
-If a dictionary stemmer encounters a word not in its dictionary, it doesn't
-know how to deal with it.  An algorithmic stemmer, on the other hand, will
-apply the same rules as before, correctly or incorrectly.
---
+单词的意义会随着时间而变化。过去 `mobility` 的词义可能是 `mobil`（美孚公司） ，
+现在 `mobility` 是 `mobile phone`。字典需要保持最新的状态，这是一个极为耗时的任务。
+通常当字典可用时，它的一些条目已经是过时的了。
 
-Size and performance::
-+
---
+如果字典词干提取器遇到一个词汇是字典中没有的，那么它并不会知道如何处理这个词。
+在另一方面，算法词干提取器会像过去一样匹配合适的规则，无论对错。
 
-A dictionary stemmer needs to load all words,((("dictionary stemmers", "size and performance"))) all prefixes, and all suffixes
-into memory. This can use a significant amount of RAM. Finding the right stem
-for a word is often considerably more complex than the equivalent process with
-an algorithmic stemmer.
+字典尺寸和性能：
 
-Depending on the quality of the dictionary, the process of removing prefixes
-and suffixes may be more or less efficient.  Less-efficient forms can slow
-the stemming process significantly.
+字典词干提取器需要加载全部的词汇、前缀、后缀到内存中。这样就能使用大量的内存。
+为一个词汇找到合适的词干，其过程往往比等效的算法词干提取器复杂得多。
 
-Algorithmic stemmers, on the other hand, are usually simple, small, and fast.
---
+根据字典的质量，消除前缀和后缀的过程可能多少会有效果。低效方式能显著地减缓词干提取过程。
+而另一方面，算法词干提取器通常是轻便快捷的。
 
-TIP: If a good algorithmic stemmer exists for your language, it is usually a
-better choice than a dictionary-based stemmer.  Languages with poor (or nonexistent) algorithmic stemmers can use the Hunspell dictionary stemmer, which
-we discuss in the next section.
-
+TIP: 如果你的语言支持一个好的算法词干提取器，它通常比一个基于字典的词干提取器更好。若不支持算法词干提取器可以使用
+“Hunspell” 的字典词干提取器，我们将在下一节中讨论。
